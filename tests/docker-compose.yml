@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  test-app:
+    build: ..
+    links:
+      - mongodb
+    volumes:
+      - ..:/usr/src/app
+    command: python -m tornado.test.runtests discover -v -s tests
+    environment:
+      - SHORTIE_SETTINGS=.test
+
+  mongodb:
+    image: mvertes/alpine-mongo
+    expose:
+      - "27017"
+    volumes:
+      - mongo-test:/data/db
+
+volumes:
+  mongo-test:

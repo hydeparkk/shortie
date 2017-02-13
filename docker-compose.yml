@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  app:
+    restart: always
+    build: .
+    expose:
+      - "8000"
+    links:
+      - mongodb
+    command: python -m shortie.run
+    environment:
+      - SHORTIE_SETTINGS=.production
+      - VIRTUAL_HOST=shortie.local
+
+  mongodb:
+    restart: always
+    image: mvertes/alpine-mongo
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - mongo-data:/data/db
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+volumes:
+  mongo-data:

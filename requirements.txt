@@ -1,0 +1,5 @@
+tornado==4.4.2
+motor==1.1
+hashids==1.2.0
+passlib==1.7.1
+pyjwt==1.4.2

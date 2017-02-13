@@ -90,7 +90,7 @@ class TestShortieDao(DaoTestBase):
 
         self.assertEqual(
             {
-                rec['long_url']
+                rec['url']
                 for rec in await self.shortie_dao.get_user_shorties(
                     'tst@t.com'
                 )

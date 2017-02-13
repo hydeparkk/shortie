@@ -53,7 +53,7 @@ class TestInfoHandler(HandlersTestBase):
     async def test_get_user_shorties(self):
         await self.db.shorties.insert_many([
             {
-                'long_url': 'http://tst.com',
+                'url': 'http://tst.com',
                 'shortie': 'eGWVm',
                 'users': [
                     'tester@test.com'
@@ -62,14 +62,14 @@ class TestInfoHandler(HandlersTestBase):
                 'created_at': datetime.utcnow()
             },
             {
-                'long_url': 'http://tst.com/one',
+                'url': 'http://tst.com/one',
                 'shortie': 'hello',
                 'users': [],
                 'clicks': [],
                 'created_at': datetime.utcnow()
             },
             {
-                'long_url': 'http://tst.com/two',
+                'url': 'http://tst.com/two',
                 'shortie': 'cwksL',
                 'users': [
                     'tester@test.com'
@@ -96,7 +96,7 @@ class TestInfoHandler(HandlersTestBase):
     async def test_get_shortie_info(self):
         await self.db.shorties.insert_one(
             {
-                'long_url': 'http://tst.com/one',
+                'url': 'http://tst.com/one',
                 'shortie': 'newOne',
                 'users': [],
                 'clicks': [
@@ -117,4 +117,4 @@ class TestInfoHandler(HandlersTestBase):
 
         res_body = json.loads(res.body)
 
-        self.assertEqual(res_body.get('long_url'), 'http://tst.com/one')
+        self.assertEqual(res_body.get('url'), 'http://tst.com/one')

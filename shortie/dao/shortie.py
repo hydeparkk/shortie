@@ -40,7 +40,7 @@ class Shortie(DaoBase):
                 )
             shortie = name
         else:
-            res = await self.find_long_url(url)
+            res = await self.find_full_url(url)
             if res:
                 if user_id:
                     await self.collection.update(
@@ -58,7 +58,7 @@ class Shortie(DaoBase):
             shortie = self.hasher.encode(counter.get('seq'))
 
         doc = {
-            'long_url': url,
+            'url': url,
             'shortie': shortie,
             'users': [user_id, ] if user_id else [],
             'clicks': [],
@@ -74,20 +74,20 @@ class Shortie(DaoBase):
             {'shortie': shortie_id}, projection={'_id': False, 'users': False}
         )
 
-    async def find_long_url(self, long_url):
+    async def find_full_url(self, full_url):
         return await self.collection.find_one(
-            {'long_url': long_url}
+            {'url': full_url}
         )
 
     async def get_url(self, shortie_id):
         res = await self.collection.find_one_and_update(
             {'shortie': shortie_id},
             {'$push': {'clicks': datetime.utcnow()}},
-            projection={'_id': False, 'long_url': True},
+            projection={'_id': False, 'url': True},
             return_document=ReturnDocument.AFTER
         )
         if res:
-            return res.get('long_url')
+            return res.get('url')
 
     async def get_user_shorties(self, user_id):
         return await self.collection.find(

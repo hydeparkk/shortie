@@ -228,9 +228,9 @@ $ curl -H "Host: shortie.local" localhost/api/info?shortie=lejRe
 #### Response
 ```json
 {
-    "url": "http://example.com"
+    "url": "http://example.com",
     "shortie": "lejRe",
-    "clicks: [
+    "clicks": [
         "2017-02-12 18:44:13.60100"
     ],
     "created_at" "2017-02-11 12:45:23.98700"
@@ -247,17 +247,17 @@ $ curl -H "Host: shortie.local" localhost/api/info?email=test@test.com
 {
     "shorties": [
         {
-            "url": "http://example.com"
+            "url": "http://example.com",
             "shortie": "lejRe",
-            "clicks: [
+            "clicks": [
                 "2017-02-12 18:44:13.60100"
             ],
             "created_at" "2017-02-11 12:45:23.98700"
         },
         {
-            "url": "http://test.com"
+            "url": "http://test.com",
             "shortie": "myName",
-            "clicks: [
+            "clicks": [
                 "2017-02-12 10:55:33.60100"
             ],
             "created_at" "2017-02-10 08:05:23.12870"
